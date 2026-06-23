@@ -1,35 +1,34 @@
 "use client";
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import Link from "next/link";
 import IntroLoader from "@/components/IntroLoader";
 
-export default function Home() {
+function Home() {
   const [loading, setLoading] = useState(true);
 
-  // Variantes para los paneles de transición (estilo All-Out Attack Finish)
-  const flashPanelVariants = {
+  // Variantes para los paneles de transición con tipado explícito
+  const flashPanelVariants: Variants = {
     initial: { skewX: -25, x: "110%", opacity: 0 },
     animate: {
       x: "-120%",
       opacity: 1,
-      transition: { duration: 0.35, ease: "easeOut" }
+      transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] }
     },
     exit: {
       opacity: 0,
-      transition: { duration: 0.1 } // Desaparición instantánea
+      transition: { duration: 0.1 }
     }
   };
 
   return (
     <main className="bg-[#05000a] min-h-screen text-white relative overflow-hidden flex flex-col items-center justify-center">
       
-      {/* --- NUEVO FONDO EXCLUSIVO DE LA PORTADA (Cintas de texto en movimiento) --- */}
+      {/* FONDO DE CINTAS */}
       <div className="absolute inset-0 z-0 overflow-hidden opacity-[0.12] pointer-events-none flex flex-col justify-center gap-6 md:gap-10 -rotate-12 scale-[1.5]">
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            // Alternamos la dirección del movimiento para cada línea
             animate={{ x: i % 2 === 0 ? ["-50%", "0%"] : ["0%", "-50%"] }}
             transition={{ duration: 30 + i * 2, repeat: Infinity, ease: "linear" }}
             className="whitespace-nowrap font-black italic text-6xl md:text-8xl text-purple-600 tracking-widest uppercase"
@@ -39,20 +38,17 @@ export default function Home() {
         ))}
       </div>
       
-      {/* Sombra radial para oscurecer los bordes y centrar la atención en tu nombre */}
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,transparent_0%,#05000a_80%)] pointer-events-none" />
-      {/* -------------------------------------------------------------------------- */}
 
       <AnimatePresence mode="wait">
         {loading ? (
           <IntroLoader key="loader" finishLoading={() => setLoading(false)} />
         ) : (
-          
           <motion.div 
             key="content"
             className="flex flex-col items-center justify-center min-h-screen p-8 text-center relative z-10 w-full"
           >
-            {/* --- CAPA DE TRANSICIÓN RELÁMPAGO --- */}
+            {/* CAPA DE TRANSICIÓN RELÁMPAGO */}
             <motion.div
               initial={{ opacity: 1 }}
               animate={{ opacity: 0 }}
@@ -66,14 +62,13 @@ export default function Home() {
               />
               <motion.div
                 initial="initial" animate="animate" exit="exit" variants={flashPanelVariants}
-                transition={{ duration: 0.35, ease: "easeOut", delay: 0.1 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 className="absolute inset-0 bg-white"
                 style={{ clipPath: 'polygon(100% 15%, 30% 0%, 0% 40%, 0% 80%, 80% 100%, 100% 70%)' }}
               />
             </motion.div>
-            {/* ------------------------------------------ */}
 
-            {/* --- CONTENIDO PRINCIPAL --- */}
+            {/* CONTENIDO PRINCIPAL */}
             <motion.div
               initial={{ scale: 3, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -100,7 +95,6 @@ export default function Home() {
                   </span>
                 </h1>
 
-                {/* --- BOTÓN ENTRAR AL PORTFOLIO --- */}
                 <Link href="/portfolio" className="mt-10 z-20 outline-none">
                   <motion.div 
                     initial={{ y: 50, opacity: 0, rotate: -10 }}
@@ -119,13 +113,13 @@ export default function Home() {
                     Entrar al Portfolio
                   </motion.div>
                 </Link>
-                
               </motion.div>
             </motion.div>
-
           </motion.div>
         )}
       </AnimatePresence>
     </main>
   );
 }
+
+export default Home;
