@@ -11,7 +11,8 @@ export default function IntroLoader({ finishLoading }: { finishLoading: () => vo
     return () => clearTimeout(timer);
   }, [finishLoading]);
 
-  const letterVariants = {
+  // Se usa 'any' explícito para evitar conflictos de tipado con la función de animación
+  const letterVariants: any = {
     initial: { y: 400, rotate: -50, opacity: 0 },
     animate: (i: number) => ({
       y: 0,
@@ -36,7 +37,7 @@ export default function IntroLoader({ finishLoading }: { finishLoading: () => vo
         transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] }
       }}
     >
-      {/* Fondo 1: Banda diagonal optimizada para GPU (Cruza de izquierda a derecha) */}
+      {/* Fondo 1 */}
       <motion.div 
         initial={{ skewX: -20 }}
         animate={{ x: ["-30vw", "130vw"] }}
@@ -44,7 +45,7 @@ export default function IntroLoader({ finishLoading }: { finishLoading: () => vo
         className="absolute top-0 bottom-0 w-64 bg-purple-700 opacity-20 pointer-events-none left-0 transform-gpu will-change-transform"
       />
       
-      {/* Fondo 2: Segunda banda optimizada para GPU (Cruza a contra tiempo de derecha a izquierda) */}
+      {/* Fondo 2 */}
       <motion.div 
         initial={{ skewX: -20 }}
         animate={{ x: ["130vw", "-30vw"] }}
