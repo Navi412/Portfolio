@@ -23,7 +23,7 @@ function Home() {
   return (
     <main className="bg-[#05000a] min-h-screen text-white relative overflow-hidden flex flex-col items-center justify-center">
       
-      {/* FONDO DE CINTAS (Ajustado globalmente) */}
+      {/* FONDO DE CINTAS */}
       <div className="absolute inset-0 z-0 overflow-hidden opacity-[0.12] pointer-events-none flex flex-col justify-center gap-6 md:gap-10 -rotate-12 scale-[1.5] md:scale-[1.5]">
         {[...Array(8)].map((_, i) => (
           <motion.div
@@ -47,7 +47,7 @@ function Home() {
             key="content"
             className="flex flex-col items-center justify-center min-h-screen w-full relative z-10"
           >
-            {/* CAPA DE TRANSICIÓN RELÁMPAGO */}
+            {/* CAPA DE TRANSICIÓN */}
             <motion.div
               initial={{ opacity: 1 }}
               animate={{ opacity: 0 }}
@@ -68,7 +68,7 @@ function Home() {
             </motion.div>
 
             {/* ======================================================== */}
-            {/* VISTA ORDENADOR (Oculta en móvil con 'hidden md:flex')   */}
+            {/* VISTA ORDENADOR                                          */}
             {/* ======================================================== */}
             <motion.div
               initial={{ scale: 3, opacity: 0 }}
@@ -108,46 +108,48 @@ function Home() {
             </motion.div>
 
             {/* ======================================================== */}
-            {/* VISTA MÓVIL (Oculta en PC con 'flex md:hidden')          */}
+            {/* VISTA MÓVIL (Corregida)                                  */}
             {/* ======================================================== */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
-              className="flex md:hidden flex-col items-center justify-between h-[80vh] w-full px-6 relative z-10"
+              // Usamos justify-center en lugar de space-between para agruparlo todo al medio
+              // y pb-24 asegura que la parte de abajo quede vacía para el botón de música
+              className="flex md:hidden flex-col items-center justify-center min-h-[100dvh] pb-24 w-full px-6 relative z-10"
             >
-              {/* Nombres apilados brutalistas para aprovechar el alto del móvil */}
-              <div className="flex flex-col items-center w-full mt-10 gap-4 font-black italic uppercase tracking-tight">
+              {/* Nombres apilados */}
+              <div className="flex flex-col items-center w-full gap-5 font-black italic uppercase tracking-tight mb-12">
                 <motion.span 
                   initial={{ x: -100 }} animate={{ x: 0 }} transition={{ type: "spring", delay: 0.5 }}
-                  className="text-6xl text-white bg-black px-4 py-2 border-2 border-white transform rotate-3 w-full text-center"
+                  className="text-5xl text-white bg-black px-4 py-2 border-2 border-white transform rotate-3 w-[90%] text-center"
                 >
                   IVÁN
                 </motion.span>
 
                 <motion.span 
                   initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.7 }}
-                  className="text-7xl text-purple-500 drop-shadow-[4px_4px_0px_rgba(255,255,255,1)] z-10"
+                  className="text-6xl text-purple-500 drop-shadow-[4px_4px_0px_rgba(255,255,255,1)] z-10"
                 >
                   MARTÍN
                 </motion.span>
 
                 <motion.span 
                   initial={{ x: 100 }} animate={{ x: 0 }} transition={{ type: "spring", delay: 0.9 }}
-                  className="text-5xl text-white bg-purple-600 px-6 py-3 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transform -rotate-3 w-[110%] text-center"
+                  className="text-4xl text-white bg-purple-600 px-6 py-3 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transform -rotate-3 w-[100%] text-center"
                   style={{ clipPath: 'polygon(0% 10%, 100% 0%, 95% 90%, 5% 100%)' }}
                 >
                   VALLEJO
                 </motion.span>
               </div>
 
-              {/* Botón adaptado a móvil (ancho completo) */}
-              <Link href="/portfolio" className="w-full mt-auto mb-10 z-20 outline-none">
+              {/* Botón ENTRAR */}
+              <Link href="/portfolio" className="w-[90%] z-20 outline-none">
                 <motion.div 
                   whileTap={{ scale: 0.95 }}
                   className="w-full text-xl text-center font-bold bg-white text-black py-4 border-4 border-purple-600 uppercase shadow-[6px_6px_0px_rgba(147,51,234,1)] cursor-pointer select-none"
                 >
-                  Entrar
+                  ENTRAR
                 </motion.div>
               </Link>
             </motion.div>
