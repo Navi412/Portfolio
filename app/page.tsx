@@ -1,11 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import Link from "next/link";
 import IntroLoader from "@/components/IntroLoader";
 
 function Home() {
   const [loading, setLoading] = useState(true);
+  const finishLoading = useCallback(() => setLoading(false), []);
 
   const flashPanelVariants: Variants = {
     initial: { skewX: -25, x: "110%", opacity: 0 },
@@ -41,7 +42,7 @@ function Home() {
 
       <AnimatePresence mode="wait">
         {loading ? (
-          <IntroLoader key="loader" finishLoading={() => setLoading(false)} />
+          <IntroLoader key="loader" finishLoading={finishLoading} />
         ) : (
           <motion.div 
             key="content"

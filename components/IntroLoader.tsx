@@ -1,15 +1,24 @@
 "use client";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function IntroLoader({ finishLoading }: { finishLoading: () => void }) {
-  
+
+  // Guardamos la última versión de finishLoading en un ref para que el
+  // temporizador de abajo se cree una única vez al montar y nunca se
+  // reinicie por culpa de que el padre nos pase una nueva referencia de
+  // función en cada render (p. ej. durante Fast Refresh en desarrollo).
+  const finishLoadingRef = useRef(finishLoading);
+  useEffect(() => {
+    finishLoadingRef.current = finishLoading;
+  }, [finishLoading]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      finishLoading();
+      finishLoadingRef.current();
     }, 3500);
     return () => clearTimeout(timer);
-  }, [finishLoading]);
+  }, []);
 
   const letterVariants: any = {
     initial: { y: 400, rotate: -50, opacity: 0 },
