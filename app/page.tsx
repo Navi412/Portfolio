@@ -116,7 +116,7 @@ function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
               // Usamos justify-center en lugar de space-between para agruparlo todo al medio
-              // y pb-24 asegura que la parte de abajo quede vacía para el botón de música
+              // y pb-24 deja algo de aire en la parte de abajo
               className="flex md:hidden flex-col items-center justify-center min-h-[100dvh] pb-24 w-full px-6 relative z-10"
             >
               {/* Nombres apilados */}

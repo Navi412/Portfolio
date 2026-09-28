@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-// Ruta corregida: apunta a la carpeta components de la raíz
-import AudioPlayer from "@/components/AudioPlayer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +29,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col relative">
-        <AudioPlayer />
         {children}
       </body>
     </html>
